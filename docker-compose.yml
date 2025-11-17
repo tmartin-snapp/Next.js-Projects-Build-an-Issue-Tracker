@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mysql
+    container_name: sqlIssueTracker
+    environment:
+      - MYSQL_DATABASE=issueTracker
+      - MYSQL_ROOT_PASSWORD=SnappSolutions2025
+    ports:
+      - "3307:3306"
+    volumes:
+      - C:\Users\tmartin\cursos\databases\sqlissueTracker:/var/lib/mysql
+    restart: always
+
+  adminer:
+    image: adminer
+    container_name: adminerIssueTracker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always
