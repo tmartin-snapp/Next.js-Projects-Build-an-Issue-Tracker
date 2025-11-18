@@ -30,15 +30,15 @@ const NewIssuePage = () => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
-          try {
-            setSubmitting(true);
-            await axios.post("/api/issues", data);
-            router.push("/issues");
-          } catch (error) {
-            setSubmitting(false);
-            setError("An unexplected error occurred. Please try again.");
-          }
-        })
+    try {
+      setSubmitting(true);
+      await axios.post("/api/issues", data);
+      router.push("/issues");
+    } catch (error) {
+      setSubmitting(false);
+      setError("An unexplected error occurred. Please try again.");
+    }
+  });
 
   return (
     <div className="max-w-xl">
@@ -47,10 +47,7 @@ const NewIssuePage = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form
-        className="space-y-3"
-        onSubmit={onSubmit}
-        >
+      <form className="space-y-3" onSubmit={onSubmit}>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <TextField.Root>
           <TextField.Input placeholder="Title" {...register("title")} />
@@ -64,7 +61,9 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        <Button disabled={isSubmitting}>Submit New Issue {isSubmitting && <Spinner />}</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
