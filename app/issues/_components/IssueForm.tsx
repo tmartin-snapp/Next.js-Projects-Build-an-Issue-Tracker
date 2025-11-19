@@ -11,12 +11,9 @@ import { Button, Callout, TextField } from "@radix-ui/themes";
 import { ErrorMessage, Spinner } from "@/app/components";
 import { IssueSchema } from "@/app/api/issues/validationSchemas";
 import { Issue } from "@prisma/client";
+import SimpleMDE from "react-simplemde-editor";
 
 import "easymde/dist/easymde.min.css";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
 
 type IssueFormData = z.infer<typeof IssueSchema>;
 
