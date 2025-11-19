@@ -1,18 +1,15 @@
 "use client";
 
-import { Button, Callout, Text, TextField } from "@radix-ui/themes";
-import dynamic from "next/dynamic";
-import { useForm, Controller, set } from "react-hook-form";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/app/api/issues/validationSchemas";
+import { useForm, Controller, set } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import axios from "axios";
 import { z } from "zod";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
-import delay from "delay";
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, Text, TextField } from "@radix-ui/themes";
+import { ErrorMessage, Spinner } from "@/app/components"
+import { createIssueSchema } from "@/app/api/issues/validationSchemas";
 
 import "easymde/dist/easymde.min.css";
 
@@ -43,8 +40,6 @@ const NewIssuePage = async () => {
       setError("An unexplected error occurred. Please try again.");
     }
   });
-
-  await delay(1000);
 
   return (
     <div className="max-w-xl">
