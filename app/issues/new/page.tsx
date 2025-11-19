@@ -11,12 +11,13 @@ import { createIssueSchema } from "@/app/api/issues/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import delay from "delay";
 
 import "easymde/dist/easymde.min.css";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
-const NewIssuePage = () => {
+const NewIssuePage = async () => {
   const router = useRouter();
   const {
     register,
@@ -39,6 +40,8 @@ const NewIssuePage = () => {
       setError("An unexplected error occurred. Please try again.");
     }
   });
+
+  await delay(1000);
 
   return (
     <div className="max-w-xl">
