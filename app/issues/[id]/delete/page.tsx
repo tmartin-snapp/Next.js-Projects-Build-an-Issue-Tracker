@@ -13,21 +13,23 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
 
   const deleteIssue = async () => {
     try {
-      setDeleting(true)
+      setDeleting(true);
       await axios.delete("/api/issues/" + issueId);
-      router.push("/issues");
+      router.push("/issues/list");
       router.refresh();
     } catch (error) {
       setDeleting(false);
       setError(true);
     }
-  }
+  };
 
   return (
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red" disabled={isDeleting}>Delete Issue {isDeleting && <Spinner/>} </Button>
+          <Button color="red" disabled={isDeleting}>
+            Delete Issue {isDeleting && <Spinner />}{" "}
+          </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
@@ -42,11 +44,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button
-                variant="solid"
-                color="red"
-                onClick={deleteIssue}
-              >
+              <Button variant="solid" color="red" onClick={deleteIssue}>
                 Delete
               </Button>
             </AlertDialog.Action>
@@ -56,8 +54,17 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
       <AlertDialog.Root open={error}>
         <AlertDialog.Content>
           <AlertDialog.Title>Title</AlertDialog.Title>
-          <AlertDialog.Description>This issue could not be deleted</AlertDialog.Description>
-          <Button color="gray" variant="soft" mt="2" onClick={() => setError(false)}>OK</Button>
+          <AlertDialog.Description>
+            This issue could not be deleted
+          </AlertDialog.Description>
+          <Button
+            color="gray"
+            variant="soft"
+            mt="2"
+            onClick={() => setError(false)}
+          >
+            OK
+          </Button>
         </AlertDialog.Content>
       </AlertDialog.Root>
     </>
