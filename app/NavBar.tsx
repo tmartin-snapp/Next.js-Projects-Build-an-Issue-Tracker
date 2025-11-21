@@ -1,5 +1,6 @@
 "use client";
 
+import {Skeleton} from "@/app/components";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -24,6 +25,7 @@ const NavBar = () => {
             <Link href="/">
               <FaBug />
             </Link>
+            <NavLinks />
           </Flex>
           <AuthStatus />
         </Flex>
@@ -35,7 +37,7 @@ const NavBar = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  if (status === "loading") return null;
+  if (status === "loading") return <Skeleton width="3rem"/>;
 
   if (status === "unauthenticated")
     return <Link href="/api/auth/signin">Login</Link>;
@@ -73,7 +75,7 @@ const NavLinks = () => {
     { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues/list" },
   ];
-  
+
   return (
     <ul className="flex space-x-6">
       {links.map((link) => (
